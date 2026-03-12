@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            todo list
+        </title>
+        <style>
+            .to{
+                font-style: solid;
+                font-family:Arial, Helvetica, sans-serif;
+            }
+            .js-input{
+                font-family:Arial, Helvetica, sans-serif;
+                display:grid;
+                grid-template-columns:220px 170px 100px;
+                column-gap:10px;
+                margin-bottom:10px;
+                align-items:stretch;
+            }
+            .js-date-input{
+                
+                font-size:15px;
+                padding:6px;
+                font-family:Arial, Helvetica, sans-serif;
+            }
+            .add{
+                font-family:Arial, Helvetica, sans-serif;
+        
+               font-size:15px;
+                background-color:green;
+                color:white;
+                border:none;
+            }
+           
+            .todo-grid{
+                font-family:Arial, Helvetica, sans-serif;
+                display:grid;
+                grid-template-columns:220px 170px 100px;
+                column-gap:10px;
+                row-gap:10px;
+                align-items:center;
+            }
+            .del{
+                background-color:rgb(139,0,0);
+                font-family:Arial, Helvetica, sans-serif;
+                color:white;
+                font-size:15px;
+                padding:10px 15px;
+                border:none;
+
+            }
+        </style>
+        </head>
+        <body>
+           <p class="to">
+            Todo List 
+           </p>
+           <div  class="js-input">
+              <input placeholder="Todo name" class="js-name-input">
+              <input type="date" class="js-date-input">
+              <button onclick="addto();" class="add js-add"  >
+                  Add
+           </button>
+           </div>
+          
+           <div class="js-todolist todo-grid">
+
+           </div>
+            <!-- <button onclick="todolist.splice(${i}, 1); rendertodolist();">
+                        delete
+                        </button> -->
+            <script>
+                // document.querySelector('js-add')
+                // .addEventListener('click',()=>{
+                //     rendertodolist();
+                // })
+            const todolist=[];
+             
+               rendertodolist();
+            function rendertodolist(){
+                  let storehtml='';
+                   for(let i=0; i<todolist.length;i++){
+                const toodoobject=todolist[i];
+                const name=toodoobject.name;
+                const duedate=toodoobject.duedate;
+
+                console.log(toodoobject);
+                const html=`
+                    <div >${name}</div>
+                        <div> ${duedate}</div>
+
+                        <button onclick="todolist.splice(${i}, 1);rendertodolist();" class="del">
+                            Delete
+                            </button>
+                    `;
+                 storehtml+=html;
+            }
+        
+                document.querySelector('.js-todolist')
+                .innerHTML=storehtml;
+            console.log(storehtml);
+        }
+                function addto(){
+
+            const inputElement= document.querySelector('.js-name-input');
+            const name=inputElement.value;
+            const dateInputElement=document.querySelector('.js-date-input')
+            const duedate=dateInputElement.value;
+           
+                todolist.push({name:name,duedate:duedate});
+                
+                inputElement.value='';
+                dateInputElement.value='';
+                console.log(todolist);
+                rendertodolist();
+                }
+             </script>
+        </body>
+    
+</html>
